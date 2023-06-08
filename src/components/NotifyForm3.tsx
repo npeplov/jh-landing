@@ -4,7 +4,7 @@ import "./formInput/formInput.css";
 
 export const NotifyForm3 = () => {
   const [isEmailSent, setEmailSent] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  // const [emailError, setEmailError] = useState(false);
   const [open, setOpen] = useState(true);
   const [email, setEmail] = useState("");
   const handleClick = () => {
@@ -14,7 +14,7 @@ export const NotifyForm3 = () => {
       setEmailSent(true);
       console.log(email);
     }
-    setEmailError(true);
+    // setEmailError(true);
   };
   return (
     <>
@@ -28,7 +28,7 @@ export const NotifyForm3 = () => {
           }}
         >
           <input
-            onChange={({ target }: any) => {
+            onChange={({ target }) => {
               setEmail(target.value);
             }}
             placeholder="Введите email"
