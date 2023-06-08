@@ -27,7 +27,7 @@ function App() {
   const refAboutBox = useRef<HTMLDivElement>(null);
   const refShield = useRef<HTMLDivElement>(null);
   const refAboutButton = useRef<HTMLButtonElement>(null);
-  const refIconBack = useRef<HTMLButtonElement>(null);
+  const refIconBack = useRef<HTMLDivElement>(null);
 
   const handleNotifyClick = () => {
     setNotifyClicked(!isNotifyClicked);
