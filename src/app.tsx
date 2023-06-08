@@ -7,6 +7,7 @@ import { NotifyButton } from "./components/NotifyButton";
 import { NotifyForm3 } from "./components/NotifyForm3";
 import { Shield } from "./components/Shield";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
+import { ReactComponent as Logo } from "./svg/juniorhub.svg";
 
 const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   return <Box {...props} ref={ref} />;
@@ -95,7 +96,8 @@ function App() {
             top: "109px",
           }}
         >
-          <img src="/juniorhub.svg" width={86} height={100} />
+          <Logo/>
+          {/* <img src="/juniorhub.svg" width={86} height={100} /> */}
           <Typography variant="h2" sx={{ mt: "2rem" }}>
             JuniorHub
           </Typography>

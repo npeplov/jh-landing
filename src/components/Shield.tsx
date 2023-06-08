@@ -13,7 +13,7 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        background: "url(/shield.svg)",
+        background: "url(./shield.svg)",
         position: "relative",
         top: 0,
         left: 0,
