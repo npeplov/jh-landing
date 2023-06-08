@@ -1,6 +1,6 @@
 import { Alert, Button, Collapse } from "@mui/material";
 import { useState } from "react";
-import "./formInput/formInput.css";
+import "./formInput.css"
 
 export const NotifyForm3 = () => {
   const [isEmailSent, setEmailSent] = useState(false);

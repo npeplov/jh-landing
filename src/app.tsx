@@ -15,8 +15,10 @@ const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
 function App() {
   const [isNotifyClicked, setNotifyClicked] = useState(false);
   const [isAboutClicked, setAboutClicked] = useState(false);
+  const [isInitiated, setInitiated] = useState(false);
 
   const handleAboutClick = () => {
+    setInitiated(true);
     setAboutClicked(!isAboutClicked);
   };
 
@@ -37,11 +39,11 @@ function App() {
     if (isAboutClicked) {
       gsap.to(refIconBack.current, { x: -10, opacity: 1 });
       gsap.to(refShield.current, { x: 380 });
-      gsap.to(refAboutBox.current, { duration: 1, x: 500 });
+      gsap.to(refAboutBox.current, { duration: 1, x: 500, opacity: 1 });
     } else {
       gsap.to(refIconBack.current, { x: -200, opacity: 0 });
       gsap.to(refShield.current, { x: 0 });
-      gsap.to(refAboutBox.current, { duration: 1, x: -100 });
+      gsap.to(refAboutBox.current, { duration: 1, x: -100, opacity: 0 });
     }
   }, [isAboutClicked]);
 
@@ -66,9 +68,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        <JHBox ref={refIconBack} >
-          <IconBack />
-        </JHBox>
+        <JHBox ref={refIconBack}>{isInitiated && <IconBack />}</JHBox>
         <AboutButton onClick={handleAboutClick} />
       </JHBox>
 
@@ -81,7 +81,7 @@ function App() {
           top: 150,
         }}
       >
-        <About />
+        {isInitiated && <About />}
       </JHBox>
       <Shield ref={refShield}>
         <Box

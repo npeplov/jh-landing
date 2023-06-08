@@ -26,11 +26,7 @@ export const ContactsButton: React.FC<ContactsButtonProps> = ({ onClick }) => {
         },
       }}
     >
-      <ContactsIcon sx={{
-        "&:hover": {
-          fill: "#000"
-        }
-      }}/>
+      <ContactsIcon />
       Связаться с нами
     </Button>
   );
