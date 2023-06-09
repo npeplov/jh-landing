@@ -8,6 +8,7 @@ import { NotifyForm3 } from "./components/NotifyForm3";
 import { Shield } from "./components/Shield";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
 import { ReactComponent as Logo } from "./svg/juniorhub.svg";
+import { ReactComponent as ShieldImg } from "./svg/shield.svg";
 
 const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   return <Box {...props} ref={ref} />;
@@ -49,81 +50,87 @@ function App() {
   }, [isAboutClicked]);
 
   return (
-    <Box
-      sx={{
-        bgcolor: "text.primary",
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-            <img src="./shield.svg"/>
-      <JHBox
+    <><div style={{background: "#0f1335"}}>
+
+      <img src="./shield.svg" />
+      <ShieldImg />
+    </div>
+
+      <Box
         sx={{
-          color: "#EAEAEA",
-          position: "absolute",
-          top: 95,
-          left: 155,
+          bgcolor: "text.primary",
+          width: "100vw",
+          height: "100vh",
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <JHBox ref={refIconBack}>{isInitiated && <IconBack />}</JHBox>
-        <AboutButton onClick={handleAboutClick} />
-      </JHBox>
-
-      <JHBox
-        ref={refAboutBox}
-        sx={{
-          position: "absolute",
-          color: "#EAEAEA",
-          left: -370,
-          top: 150,
-        }}
-      >
-        {isInitiated && <About />}
-      </JHBox>
-      <Shield ref={refShield}>
-        <Box
+        <JHBox
           sx={{
+            color: "#EAEAEA",
+            position: "absolute",
+            top: 95,
+            left: 155,
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            width: "330px",
-            height: "195px",
-            position: "absolute",
-            top: "109px",
           }}
         >
-          <Logo />
-          <Typography variant="h1" sx={{ mt: "2rem" }}>
-            JuniorHub
-          </Typography>
-          <Typography
-            variant="h2"
-            sx={{ mt: "0.75rem" }}
-            fontSize={"0.875rem"}
-            color={"white"}
-          >
-            Агрегатор проектов для Junior IT-специалистов
-          </Typography>
-        </Box>
-        <Box
+          <JHBox ref={refIconBack}>{isInitiated && <IconBack />}</JHBox>
+          <AboutButton onClick={handleAboutClick} />
+        </JHBox>
+
+        <JHBox
+          ref={refAboutBox}
           sx={{
             position: "absolute",
-            top: "360px",
+            color: "#EAEAEA",
+            left: -370,
+            top: 150,
           }}
         >
-          {isNotifyClicked ? (
-            <NotifyForm3 />
-          ) : (
-            <NotifyButton disabled={false} onClick={handleNotifyClick} />
-          )}
-        </Box>
-      </Shield>
-    </Box>
+          {isInitiated && <About />}
+        </JHBox>
+        <Shield ref={refShield}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "330px",
+              height: "195px",
+              position: "absolute",
+              top: "109px",
+            }}
+          >
+            <Logo />
+            <Typography variant="h1" sx={{ mt: "2rem" }}>
+              JuniorHub
+            </Typography>
+            <Typography
+              variant="h2"
+              sx={{ mt: "0.75rem" }}
+              fontSize={"0.875rem"}
+              color={"white"}
+            >
+              Агрегатор проектов для Junior IT-специалистов
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "360px",
+            }}
+          >
+            {isNotifyClicked ? (
+              <NotifyForm3 />
+            ) : (
+              <NotifyButton disabled={false} onClick={handleNotifyClick} />
+            )}
+          </Box>
+        </Shield>
+      </Box>
+    </>
   );
 }
 
