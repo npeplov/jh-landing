@@ -59,6 +59,7 @@ function App() {
         justifyContent: "center",
       }}
     >
+            <img src="./shield.svg"/>
       <JHBox
         sx={{
           color: "#EAEAEA",

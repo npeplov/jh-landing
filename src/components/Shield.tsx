@@ -6,8 +6,8 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     <Box
       ref={ref}
       {...props}
-      width={421.6}
-      height={496}
+      // width={425.6}
+      // height={496}
       display="flex"
       flexDirection="column"
       alignItems="center"
