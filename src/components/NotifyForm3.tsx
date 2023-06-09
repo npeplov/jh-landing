@@ -1,20 +1,30 @@
 import { Alert, Button, Collapse } from "@mui/material";
 import { useState } from "react";
-import "./formInput.css"
+import "./formInput.css";
+
+const validateEmail = (email: string) => {
+  return email.match(
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
 
 export const NotifyForm3 = () => {
   const [isEmailSent, setEmailSent] = useState(false);
-  // const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [open, setOpen] = useState(true);
   const [email, setEmail] = useState("");
   const handleClick = () => {
-    // 1 отправка
-    if (email !== "") {
-      // 2 если отправка ок
+    if (validateEmail(email)) {
+      const formData = new FormData();
+      formData.append("email", email);
+      fetch("./mail.php", {
+        method: "POST",
+        body: formData,
+      });
       setEmailSent(true);
-      console.log(email);
     }
-    // setEmailError(true);
+    setEmailError(true);
   };
   return (
     <>
@@ -28,6 +38,7 @@ export const NotifyForm3 = () => {
           }}
         >
           <input
+            className={emailError ? "error email" : "email"}
             onChange={({ target }) => {
               setEmail(target.value);
             }}

@@ -97,7 +97,6 @@ function App() {
           }}
         >
           <Logo/>
-          {/* <img src="/juniorhub.svg" width={86} height={100} /> */}
           <Typography variant="h2" sx={{ mt: "2rem" }}>
             JuniorHub
           </Typography>

@@ -1,4 +1,4 @@
-input {
+.email {
   padding: 10px 22px;
   max-width: 192px;
   font-family: Nunito;
@@ -11,13 +11,17 @@ input {
   transition: all ease 0.05s;
 }
 
-input:hover {
+.email:hover {
   outline: 1px solid #999;
 }
 
-input:focus,
-input:active {
+.email:focus,
+.email:active {
   /* outline: none; */
   outline: 1px solid #aaa;
   /* border: 2px solid #00A1E7; */
+}
+
+.error {
+  border: 2px solid red;
 }
