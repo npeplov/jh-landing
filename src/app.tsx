@@ -8,7 +8,6 @@ import { NotifyForm3 } from "./components/NotifyForm3";
 import { Shield } from "./components/Shield";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
 import { ReactComponent as Logo } from "./svg/juniorhub.svg";
-import { ReactComponent as ShieldImg } from "./svg/shield.svg";
 
 const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   return <Box {...props} ref={ref} />;
@@ -50,12 +49,7 @@ function App() {
   }, [isAboutClicked]);
 
   return (
-    <><div style={{background: "#fff"}}>
-
-      <img src="./shield.svg" />
-      <ShieldImg />
-    </div>
-
+    <>
       <Box
         sx={{
           bgcolor: "text.primary",
