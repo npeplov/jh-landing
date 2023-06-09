@@ -1,5 +1,8 @@
 # jh-landing
-Landing for coming soon page. Stack: vite + preact
+Landing for coming soon page. Stack: vite + react + MUI
+
+Демо
+https://npeplov.github.io/jh-landing/
 
 #### Установка с помощью Node
 ```
