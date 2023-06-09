@@ -6,19 +6,21 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     <Box
       ref={ref}
       {...props}
-      width={421}
+      width={421.6}
       height={496}
       display="flex"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       sx={{
-        background: "url(./shield.svg)",
+        // background: "url(./shield.svg)",
         position: "relative",
         top: 0,
         left: 0,
         zIndex: 999,
       }}
-    ></Box>
+    >
+      <img src="./shield.svg"/>
+    </Box>
   );
 });
