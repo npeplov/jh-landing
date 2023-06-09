@@ -96,11 +96,12 @@ function App() {
             top: "109px",
           }}
         >
-          <Logo/>
-          <Typography variant="h2" sx={{ mt: "2rem" }}>
+          <Logo />
+          <Typography variant="h1" sx={{ mt: "2rem" }}>
             JuniorHub
           </Typography>
           <Typography
+            variant="h2"
             sx={{ mt: "0.75rem" }}
             fontSize={"0.875rem"}
             color={"white"}
@@ -117,7 +118,7 @@ function App() {
           {isNotifyClicked ? (
             <NotifyForm3 />
           ) : (
-            <NotifyButton onClick={handleNotifyClick} />
+            <NotifyButton disabled={false} onClick={handleNotifyClick} />
           )}
         </Box>
       </Shield>

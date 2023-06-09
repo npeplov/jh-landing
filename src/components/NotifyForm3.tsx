@@ -1,6 +1,7 @@
 import { Alert, Button, Collapse } from "@mui/material";
 import { useState } from "react";
 import "./formInput.css";
+import { NotifyButton } from "./NotifyButton";
 
 const validateEmail = (email: string) => {
   return email.match(
@@ -27,16 +28,16 @@ export const NotifyForm3 = () => {
     setEmailError(true);
   };
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        alignItems: "center",
+      }}
+    >
       {!isEmailSent && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-            alignItems: "center",
-          }}
-        >
+        <>
           <input
             className={emailError ? "error email" : "email"}
             onChange={({ target }) => {
@@ -62,7 +63,7 @@ export const NotifyForm3 = () => {
           >
             Отправить
           </Button>
-        </div>
+        </>
       )}
       {isEmailSent && (
         <>
@@ -82,8 +83,9 @@ export const NotifyForm3 = () => {
               Email получен!
             </Alert>
           </Collapse>
+          {!open && <NotifyButton disabled onClick={() => null} />}
         </>
       )}
-    </>
+    </div>
   );
 };

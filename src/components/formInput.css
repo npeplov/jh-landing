@@ -1,14 +1,17 @@
 .email {
-  padding: 10px 22px;
   max-width: 192px;
+  padding: 10px 22px;
+
   font-family: Nunito;
-  font-size: 16px;
+  line-height: 1rem;
+  font-size: 1rem;
   font-weight: 500;
-  border-radius: 30px;
-  background: #C5D7E8FC;
-  width: fit-content;
-  border: 2px solid #C5D7E8FC;
+
+  border-radius: 2rem;
+
   transition: all ease 0.05s;
+  background: #C5D7E8FC;
+  border: none;
 }
 
 .email:hover {
@@ -17,11 +20,9 @@
 
 .email:focus,
 .email:active {
-  /* outline: none; */
   outline: 1px solid #aaa;
-  /* border: 2px solid #00A1E7; */
 }
 
 .error {
-  border: 2px solid red;
+  outline: 2px solid red;
 }

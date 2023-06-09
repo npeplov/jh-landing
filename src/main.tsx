@@ -15,7 +15,7 @@ const darkTheme = createTheme({
     },
   },
   typography: {
-    h2: {
+    h1: {
       fontSize: "2rem",
       fontFamily: ["Zen Maru Gothic", "serif"].join(","),
       fontWeight: 500,
