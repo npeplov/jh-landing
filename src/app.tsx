@@ -50,7 +50,7 @@ function App() {
   }, [isAboutClicked]);
 
   return (
-    <><div style={{background: "#0f1335"}}>
+    <><div style={{background: "#fff"}}>
 
       <img src="./shield.svg" />
       <ShieldImg />
