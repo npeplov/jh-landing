@@ -2,7 +2,7 @@ import { Alert, Button, Collapse } from "@mui/material";
 import { useState } from "react";
 import "./input/formInput.css";
 import { NotifyButton } from "./buttons/NotifyButton";
-import { JHInput } from "./input/JHInput";
+// import { JHInput } from "./input/JHInput";
 
 const validateEmail = (email: string) => {
   return email.match(
@@ -39,20 +39,20 @@ export const NotifyForm = () => {
     >
       {!isEmailSent && (
         <>
-          <JHInput
-            // onChange={setEmail()}
-            // вернуть target.value
-            // отправить?
+          {/* <JHInput
+            onChange={setEmail()}
+            вернуть target.value
+            отправить?
             onChange={()=>""}
             placeholder="Введите email"
-          />
-          {/* <input
+          /> */}
+          <input
             className={emailError ? "error email" : "email"}
             onChange={({ target }) => {
               setEmail(target.value);
             }}
             placeholder="Введите email"
-          /> */}
+          />
           <Button
             onClick={() => handleClick()}
             sx={{
