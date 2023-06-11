@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { ContactsButton } from "./ContactsButton";
+import { ContactsButton } from "./buttons/ContactsButton";
 
 export const About = () => {
   return (
@@ -10,6 +10,7 @@ export const About = () => {
         display: "flex",
         flexDirection: "column",
         gap: "36px",
+        color: "text.primary",
       }}
     >
       <Typography>

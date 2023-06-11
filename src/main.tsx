@@ -1,3 +1,9 @@
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    primary: true;
+  }
+}
+
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -6,10 +12,20 @@ import App from "./app";
 const darkTheme = createTheme({
   components: {
     MuiButton: {
+      variants: [
+        {
+          props: { variant: "primary" },
+          style: {
+            color: "ffffff",
+          },
+        },
+      ],
       styleOverrides: {
         root: {
           textTransform: "none",
-          fontSize: "0.875rem"
+          fontSize: "1rem",
+          borderRadius: "3rem",
+          lineHeight: "135%",
         },
       },
     },
@@ -19,16 +35,24 @@ const darkTheme = createTheme({
       fontSize: "2rem",
       fontFamily: ["Zen Maru Gothic", "serif"].join(","),
       fontWeight: 500,
-      color: "#fff",
     },
     fontFamily: ["Nunito", "serif"].join(","),
   },
   palette: {
+    mode: "dark",
     primary: {
-      main: "#fff",
+      main: "#00A1E7",
+      dark: "#82D9FF",
+      contrastText: "#ffffff",
+    },
+    background: {
+      paper: "#2E3153",
+      default: "#101335",
     },
     text: {
-      primary: "#101335",
+      primary: "#ffffff",
+      secondary: "#00000",
+      disabled: "",
     },
   },
 });

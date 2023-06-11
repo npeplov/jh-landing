@@ -2,10 +2,10 @@ import { Box, BoxProps, Typography } from "@mui/material";
 import { gsap } from "gsap";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { About } from "./components/About";
-import { AboutButton } from "./components/AboutButton";
-import { NotifyButton } from "./components/NotifyButton";
-import { NotifyForm3 } from "./components/NotifyForm3";
+import { NotifyForm } from "./components/NotifyForm";
 import { Shield } from "./components/Shield";
+import { AboutButton } from "./components/buttons/AboutButton";
+import { NotifyButton } from "./components/buttons/NotifyButton";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
 import { ReactComponent as Logo } from "./svg/juniorhub.svg";
 
@@ -50,9 +50,17 @@ function App() {
 
   return (
     <>
+    <Box sx={{
+      width: "100vw",
+      position: "absolute",
+      bottom: 0
+    }}>
+      <video src="video.mp4" loop width={"100%"} autoPlay ></video>
+
+    </Box>
       <Box
         sx={{
-          bgcolor: "text.primary",
+          bgcolor: "background.default",
           width: "100vw",
           height: "100vh",
           display: "flex",
@@ -62,7 +70,6 @@ function App() {
       >
         <JHBox
           sx={{
-            color: "#EAEAEA",
             position: "absolute",
             top: 95,
             left: 155,
@@ -78,7 +85,6 @@ function App() {
           ref={refAboutBox}
           sx={{
             position: "absolute",
-            color: "#EAEAEA",
             left: -370,
             top: 150,
           }}
@@ -98,14 +104,14 @@ function App() {
             }}
           >
             <Logo />
-            <Typography variant="h1" sx={{ mt: "2rem" }}>
+            <Typography variant="h1" color="text.primary" sx={{ mt: "2rem" }}>
               JuniorHub
             </Typography>
             <Typography
               variant="h2"
               sx={{ mt: "0.75rem" }}
               fontSize={"0.875rem"}
-              color={"white"}
+              color="text.primary"
             >
               Агрегатор проектов для Junior IT-специалистов
             </Typography>
@@ -117,7 +123,7 @@ function App() {
             }}
           >
             {isNotifyClicked ? (
-              <NotifyForm3 />
+              <NotifyForm />
             ) : (
               <NotifyButton disabled={false} onClick={handleNotifyClick} />
             )}

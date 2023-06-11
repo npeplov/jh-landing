@@ -1,72 +1,58 @@
-import { Alert, Box, Button, Collapse } from "@mui/material";
-
-import { styled } from "@mui/system";
-import TextField from "@mui/material/TextField";
+import { Alert, Button, Collapse } from "@mui/material";
 import { useState } from "react";
+import "./input/formInput.css";
+import { NotifyButton } from "./buttons/NotifyButton";
+import { JHInput } from "./input/JHInput";
 
-const CustomTextField = styled(TextField)(() => ({
-  backgroundColor: "#C5D7E8",
-  borderRadius: "50px",
-  "& label": {
-    color: "black",
-    textAlign: "center",
-    transform: "translate(-50%, 8px)", // Выравнивание по горизонтали
-    left: "50%", // Позиционирование по горизонтали
-    "&.Mui-focused": {
-      color: "white",
-      transform: "translate(-50%, -25px)",
-    },
-  },
-  "& .MuiInput-root": {
-    "& .MuiInputBase-input": {
-      color: "black",
-    },
-    "&:focus": {
-      "& .MuiInputBase-input": {
-        color: "white",
-      },
-    },
-    "&.MuiOutlinedInput": {
-      // padding: 0,
-    },
-    "&.MuiInput-underline:before, &.MuiInput-underline:after": {
-      display: "none",
-    },
-  },
-  "& .MuiOutlinedInput-notchedOutline": {
-    border: "none", // Добавляем стиль для отключения fieldset
-  },
-}));
+const validateEmail = (email: string) => {
+  return email.match(
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
 
 export const NotifyForm = () => {
   const [isEmailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [open, setOpen] = useState(true);
+  const [email, setEmail] = useState("");
   const handleClick = () => {
-    // 1 отправка
-    if (open)
-      // 2 если отправка ок
+    if (validateEmail(email)) {
+      const formData = new FormData();
+      formData.append("email", email);
+      fetch("./mail.php", {
+        method: "POST",
+        body: formData,
+      });
       setEmailSent(true);
+    }
+    setEmailError(true);
   };
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+        alignItems: "center",
+      }}
+    >
       {!isEmailSent && (
-        <Box
-          component="form"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.5rem",
-          }}
-        >
-          <CustomTextField
-            label="Введите емейл"
-            sx={{
-              width: "180px",
-              height: "42px",
-            }}
+        <>
+          <JHInput
+            // onChange={setEmail()}
+            // вернуть target.value
+            // отправить?
+            onChange={()=>""}
+            placeholder="Введите email"
           />
-
+          {/* <input
+            className={emailError ? "error email" : "email"}
+            onChange={({ target }) => {
+              setEmail(target.value);
+            }}
+            placeholder="Введите email"
+          /> */}
           <Button
             onClick={() => handleClick()}
             sx={{
@@ -77,6 +63,10 @@ export const NotifyForm = () => {
               cursor: "pointer",
               transition: "all .2s ease",
               width: "max-content",
+              "&:active": {
+                background: "#D6F3FF",
+                color: "#101335",
+              },
               "&:hover": {
                 background: "#82D9FF",
                 color: "#101335",
@@ -85,7 +75,7 @@ export const NotifyForm = () => {
           >
             Отправить
           </Button>
-        </Box>
+        </>
       )}
       {isEmailSent && (
         <>
@@ -105,8 +95,9 @@ export const NotifyForm = () => {
               Email получен!
             </Alert>
           </Collapse>
+          {!open && <NotifyButton disabled onClick={() => null} />}
         </>
       )}
-    </>
+    </div>
   );
 };
