@@ -8,6 +8,7 @@ import { AboutButton } from "./components/buttons/AboutButton";
 import { NotifyButton } from "./components/buttons/NotifyButton";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
 import { ReactComponent as Logo } from "./svg/juniorhub.svg";
+import video from "/video.mp4";
 
 const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   return <Box {...props} ref={ref} />;
@@ -50,14 +51,15 @@ function App() {
 
   return (
     <>
-    <Box sx={{
-      width: "100vw",
-      position: "absolute",
-      bottom: 0
-    }}>
-      <video src="video.mp4" loop width={"100%"} autoPlay ></video>
-
-    </Box>
+      <Box
+        sx={{
+          width: "100vw",
+          position: "absolute",
+          bottom: 0,
+        }}
+      >
+        <video src={video} loop muted autoPlay width="100%" />
+      </Box>
       <Box
         sx={{
           bgcolor: "background.default",

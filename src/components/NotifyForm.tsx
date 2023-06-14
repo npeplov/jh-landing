@@ -1,5 +1,6 @@
-import { Alert, Button, Collapse } from "@mui/material";
-import { useState } from "react";
+import { Alert, Button, Zoom } from "@mui/material";
+import { useState, useRef } from "react";
+
 import "./input/formInput.css";
 import { NotifyButton } from "./buttons/NotifyButton";
 // import { JHInput } from "./input/JHInput";
@@ -16,6 +17,7 @@ export const NotifyForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [open, setOpen] = useState(true);
   const [email, setEmail] = useState("");
+
   const handleClick = () => {
     if (validateEmail(email)) {
       const formData = new FormData();
@@ -28,6 +30,9 @@ export const NotifyForm = () => {
     }
     setEmailError(true);
   };
+
+  const refButton = useRef<HTMLButtonElement>(null);
+
   return (
     <div
       style={{
@@ -47,20 +52,26 @@ export const NotifyForm = () => {
             placeholder="Введите email"
           /> */}
           <input
+            // при клике error_big,
+            // меняется стейт при клике?
             className={emailError ? "error email" : "email"}
             onChange={({ target }) => {
               setEmail(target.value);
             }}
             placeholder="Введите email"
+            onKeyUp={({ key }) => {
+              console.log(key);
+              key === "Enter" && handleClick();
+            }}
           />
           <Button
+            ref={refButton}
             onClick={() => handleClick()}
             sx={{
+              color: "text.primary",
               borderRadius: "2rem",
               padding: "0.5rem 1.563rem",
               background: "#00A1E7",
-              color: "#EAEAEA",
-              cursor: "pointer",
               transition: "all .2s ease",
               width: "max-content",
               "&:active": {
@@ -78,25 +89,36 @@ export const NotifyForm = () => {
         </>
       )}
       {isEmailSent && (
-        <>
-          <Collapse in={open}>
-            <Alert
-              onClose={() => {
-                setOpen(false);
-              }}
-              sx={{
-                fontSize: "14px",
-                borderRadius: 30,
-                background: "#5DCB4B",
-                padding: "4px 10px",
-              }}
-              severity="success"
-            >
-              Email получен!
-            </Alert>
-          </Collapse>
+        <div
+          style={{
+            maxHeight: "45px",
+            overflow: "hidden",
+          }}
+        >
           {!open && <NotifyButton disabled onClick={() => null} />}
-        </>
+          {open && (
+            <Zoom in={open} timeout={500}>
+              <Alert
+                onClose={() => {
+                  setOpen((prev) => !prev);
+                }}
+                sx={{
+                  color: "#fff",
+                  fontSize: "14px",
+                  borderRadius: 30,
+                  background: "#5DCB4B",
+                  padding: "4px 25px",
+                  "& svg": {
+                    fill: "#fff",
+                  },
+                }}
+                severity="success"
+              >
+                Ждем вас!
+              </Alert>
+            </Zoom>
+          )}
+        </div>
       )}
     </div>
   );

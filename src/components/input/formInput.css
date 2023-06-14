@@ -11,18 +11,31 @@
 
   transition: all ease 0.05s;
   background: #C5D7E8FC;
-  border: none;
-}
+  outline-offset: 2px;
+  border-width: 1px;
+  outline: transparent solid 2px;
 
-.email:hover {
-  outline: 1px solid #999;
+  width: 100%;
+  min-width: 0px;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  position: relative;
+  appearance: none;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  border-color: inherit;
 }
 
 .email:focus,
 .email:active {
-  outline: 1px solid #aaa;
+  border-color: #82D9FF;
+  box-shadow: 0 0 0 1px #82D9FF;
 }
 
-.error {
-  outline: 2px solid red;
+.error,
+.error:hover,
+.error:focus {
+  border-color: #FF6B17;
+  box-shadow: 0 0 0 1px #FF6B17;
 }
