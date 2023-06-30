@@ -1,14 +1,54 @@
-import { Alert, Button, Zoom } from "@mui/material";
-import { useState, useRef } from "react";
+import {
+  Alert,
+  AlertProps,
+  Box,
+  Button,
+  TextField,
+  colors,
+} from "@mui/material";
+import { useRef, useState } from "react";
 
-import "./input/formInput.css";
 import { NotifyButton } from "./buttons/NotifyButton";
-// import { JHInput } from "./input/JHInput";
+import "./input/formInput.css";
+import JHAlert from "./jhalert/JHAlert";
+import CustomButton from "../UI/CustomButton";
+import { validateEmail } from "../utils/validateEmail";
 
-const validateEmail = (email: string) => {
-  return email.match(
-    // eslint-disable-next-line no-useless-escape
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const JHInput = () => {
+  const [error, setError] = useState(false);
+  return (
+    <TextField
+      variant="filled"
+      // label="Введите email"
+      error={error}
+      onChange={() => {
+        setError(true);
+      }}
+      onMouseLeave={() => {
+        setError(false);
+      }}
+      sx={{
+        ".MuiFilledInput-root:hover:not(.Mui-disabled, .Mui-error):before": {
+          borderBottom: "none",
+        },
+        ".MuiFilledInput-root": {
+          "&::before": {
+            borderBottom: "none",
+          },
+          "&::after": {
+            borderBottom: "none",
+          },
+        },
+        ".MuiInputBase-colorPrimary": {
+          borderRadius: "0.9rem",
+          color: "#ddd",
+          background: "#E6E1E5",
+          "&:hover": {
+            color: "#cac4d0",
+          },
+        },
+      }}
+    />
   );
 };
 
@@ -22,72 +62,88 @@ export const NotifyForm = () => {
     if (validateEmail(email)) {
       const formData = new FormData();
       formData.append("email", email);
-      fetch("./mail.php", {
-        method: "POST",
-        body: formData,
-      });
-      setEmailSent(true);
+      try {
+        fetch("./mail.php", {
+          method: "POST",
+          body: formData,
+        });
+        setEmailSent(true);
+      } catch (error) {
+        console.log(error);
+      }
     }
     setEmailError(true);
   };
 
-  const refButton = useRef<HTMLButtonElement>(null);
+  // const refButton = useRef<HTMLButtonElement>(null);
+
+  // gap 20
+  // - поднять лого выше. Щас 93 сверху = 0.425fr , надо 41 = x
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        alignItems: "center",
-      }}
-    >
+    <>
       {!isEmailSent && (
-        <>
-          {/* <JHInput
-            onChange={setEmail()}
-            вернуть target.value
-            отправить?
-            onChange={()=>""}
-            placeholder="Введите email"
-          /> */}
-          <input
-            // при клике error_big,
-            // меняется стейт при клике?
-            className={emailError ? "error email" : "email"}
+        <Box
+          display="grid"
+          alignItems="start"
+          height={1}
+          gridTemplateRows="0.5406fr 0.4594fr"
+          // поднять инпут выше, отменить padding
+        >
+          <TextField
+            autoComplete="off"
+            color="primary"
+            sx={(theme) => ({
+              ".MuiInput-root": {
+                "&::before": {
+                  borderBottomColor: theme.palette.primary.main,
+                },
+                "&::after": {
+                  borderBottomColor: theme.palette.primary.main,
+                },
+              },
+              ".MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before": {
+                borderBottomColor: theme.palette.primary.main,
+              },
+            })}
+            error={emailError}
+            variant="standard"
+            label="Введите email"
+            helperText={emailError && "Неверный формат почты"}
+            InputProps={{}}
+            InputLabelProps={
+              {
+                // focused: true,
+                // color: "info",
+              }
+            }
             onChange={({ target }) => {
               setEmail(target.value);
             }}
-            placeholder="Введите email"
-            onKeyUp={({ key }) => {
-              console.log(key);
-              key === "Enter" && handleClick();
-            }}
           />
-          <Button
-            ref={refButton}
-            onClick={() => handleClick()}
+
+          <CustomButton
             sx={{
-              color: "text.primary",
-              borderRadius: "2rem",
-              padding: "0.5rem 1.563rem",
-              background: "#00A1E7",
-              transition: "all .2s ease",
-              width: "max-content",
-              "&:active": {
-                background: "#D6F3FF",
-                color: "#101335",
-              },
-              "&:hover": {
-                background: "#82D9FF",
-                color: "#101335",
-              },
+              backgroundColor: "primary.300",
             }}
+            onClick={handleClick}
+            variant="contained"
+            color="primary"
           >
             Отправить
-          </Button>
-        </>
+          </CustomButton>
+        </Box>
       )}
+
+      {/*
+      
+      --------------  JH ALERT  ------------ 
+      
+      1. пробросить онклоз
+    
+      
+      */}
+
       {isEmailSent && (
         <div
           style={{
@@ -97,29 +153,57 @@ export const NotifyForm = () => {
         >
           {!open && <NotifyButton disabled onClick={() => null} />}
           {open && (
-            <Zoom in={open} timeout={500}>
-              <Alert
+            // <Zoom in={open} timeout={500}>
+            <div>
+              <JHAlert
+                severity="success"
+                variant="filled"
                 onClose={() => {
                   setOpen((prev) => !prev);
                 }}
-                sx={{
-                  color: "#fff",
-                  fontSize: "14px",
-                  borderRadius: 30,
-                  background: "#5DCB4B",
-                  padding: "4px 25px",
-                  "& svg": {
-                    fill: "#fff",
-                  },
-                }}
-                severity="success"
               >
                 Ждем вас!
-              </Alert>
-            </Zoom>
+              </JHAlert>
+              {/* <Alert
+                onClose={() => {
+                  setOpen((prev) => !prev);
+                }}
+                sx={(theme) => ({
+                  [theme.breakpoints.down("sm")]: {
+                    fontSize: "10px",
+                    padding: "0 16px 0 16px",
+                    "&.MuiAlert-icon": {
+                      padding: "0",
+                      alignItems: "center",
+                      fontSize: "10px",
+                    },
+                    "& .MuiAlert-action": {
+                      padding: "0",
+                      alignItems: "center",
+                    },
+                  },
+                  [theme.breakpoints.up("md")]: {
+                    fontSize: "14px",
+                  },
+                  color: "#fff",
+                  borderRadius: 30,
+                  background: "#5DCB4B",
+                  "& svg": {
+                    fill: "#fff",
+                    width: "15px",
+                    height: "15px",
+                  },
+                })}
+                severity="success"
+                variant="filled"
+              >
+              Ждем вас!
+              </Alert> */}
+              {/* </Zoom> */}
+            </div>
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };

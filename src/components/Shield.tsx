@@ -6,20 +6,21 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     <Box
       ref={ref}
       {...props}
-      width={422}
-      height={496}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{
+      sx={() => ({
+        margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "1fr",
+        gridTemplateRows: "0.4257fr 0.1189fr 0.0847fr 0.3716fr",
+        width: "calc(312/360*100%)",
+        height: "auto",
+        justifyItems: "center",
+        aspectRatio: 0.852,
+        maxWidth: "422px",
         background: "url(./shield.png)",
+        backgroundSize: "cover",
         position: "relative",
-        top: 0,
-        left: 0,
         zIndex: 999,
-      }}
-    >
-    </Box>
+      })}
+    ></Box>
   );
 });

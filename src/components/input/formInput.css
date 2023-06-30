@@ -1,41 +1,46 @@
 .email {
-  max-width: 192px;
-  padding: 10px 22px;
+  max-width: 177px;
+  padding: 0.625em 16px;
 
   font-family: Nunito;
   line-height: 1rem;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 0.5207rem + 1.5748vw, 1rem);
   font-weight: 500;
 
-  border-radius: 2rem;
+  border-radius: .5rem;
 
   transition: all ease 0.05s;
   background: #C5D7E8FC;
-  outline-offset: 2px;
-  border-width: 1px;
-  outline: transparent solid 2px;
+
 
   width: 100%;
   min-width: 0px;
   outline: transparent solid 2px;
   outline-offset: 2px;
   position: relative;
-  appearance: none;
   border-width: 1px;
   border-style: solid;
-  border-image: initial;
-  border-color: inherit;
 }
 
 .email:focus,
 .email:active {
   border-color: #82D9FF;
-  box-shadow: 0 0 0 1px #82D9FF;
+  box-shadow: 0 0 0 2px #82D9FF;
 }
 
-.error,
-.error:hover,
-.error:focus {
-  border-color: #FF6B17;
-  box-shadow: 0 0 0 1px #FF6B17;
+.error
+{
+  animation: blink 1s ease-in-out;
+  border-color: rgb(255, 107, 23);
+  box-shadow: rgba(255, 107, 23, 1) 0px 0px 0px 2px;
+}
+
+@keyframes blink {
+  0% {
+    box-shadow: rgba(255, 107, 23, 1) 0px 0px 3px 3px;
+  }
+
+  95% {
+    box-shadow: rgba(255, 107, 23, 1) 0px 0px 0px 2px;
+  }
 }

@@ -1,21 +1,64 @@
-import { Box, BoxProps, Typography } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import { gsap } from "gsap";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { About } from "./components/About";
+import { Description } from "./components/Description";
 import { NotifyForm } from "./components/NotifyForm";
 import { Shield } from "./components/Shield";
 import { AboutButton } from "./components/buttons/AboutButton";
 import { NotifyButton } from "./components/buttons/NotifyButton";
 import { ReactComponent as IconBack } from "./svg/iconBack.svg";
-import { ReactComponent as Logo } from "./svg/juniorhub.svg";
+import { ReactComponent as LogoImg } from "./svg/juniorhub.svg";
+import { Title } from "./components/Title";
 import video from "/video.mp4";
+import "./app.css";
 
 const JHBox = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   return <Box {...props} ref={ref} />;
 });
 
-function App() {
+const Notify = () => {
   const [isNotifyClicked, setNotifyClicked] = useState(false);
+  const handleNotifyClick = () => {
+    setNotifyClicked(!isNotifyClicked);
+  };
+  return (
+    <Box
+      sx={{
+        // pt: "calc(22/2/312*100%)",
+      }}
+    >
+      {isNotifyClicked ? (
+        <NotifyForm />
+      ) : (
+        <NotifyButton disabled={false} onClick={handleNotifyClick} />
+      )}
+    </Box>
+  );
+};
+
+const Logo = () => {
+  return (
+    <Box
+      sx={{
+        mb: "calc(23/2/312*100%)",
+        width: "calc(67/312*100%)",
+        alignSelf: "end",
+        height: "calc(74/155.5*100%)",
+        boxSizing: "border-box",
+      }}
+    >
+      <LogoImg
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </Box>
+  );
+};
+
+function App() {
   const [isAboutClicked, setAboutClicked] = useState(false);
   const [isInitiated, setInitiated] = useState(false);
 
@@ -33,10 +76,6 @@ function App() {
   const refAboutButton = useRef<HTMLButtonElement>(null);
   const refIconBack = useRef<HTMLDivElement>(null);
 
-  const handleNotifyClick = () => {
-    setNotifyClicked(!isNotifyClicked);
-  };
-
   useEffect(() => {
     if (isAboutClicked) {
       gsap.to(refIconBack.current, { x: -10, opacity: 1 });
@@ -52,32 +91,47 @@ function App() {
   return (
     <>
       <Box
-        sx={{
-          width: "100vw",
+        sx={(theme) => ({
           position: "absolute",
           bottom: 0,
-        }}
+          [theme.breakpoints.down("sm")]: {
+            display: "none",
+          },
+          [theme.breakpoints.down("lg")]: {
+            width: "100vw",
+          },
+        })}
       >
-        <video src={video} loop muted autoPlay width="100%" />
+        {/* <video src={video} loop muted autoPlay width="100%" style={{
+          display: "block"
+        }}/> */}
       </Box>
       <Box
         sx={{
           bgcolor: "background.default",
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
+          height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         <JHBox
-          sx={{
-            position: "absolute",
-            top: 95,
-            left: 155,
-            display: "flex",
-            alignItems: "center",
-          }}
+          sx={(theme) => ({
+            display: "none",
+            [theme.breakpoints.down("sm")]: {
+              left: 185,
+              bottom: 95,
+              top: "initial",
+            },
+            [theme.breakpoints.up("md")]: {
+              display: "flex",
+              position: "absolute",
+              top: 95,
+              left: 155,
+              alignItems: "center",
+            },
+          })}
         >
           <JHBox ref={refIconBack}>{isInitiated && <IconBack />}</JHBox>
           <AboutButton onClick={handleAboutClick} />
@@ -93,43 +147,12 @@ function App() {
         >
           {isInitiated && <About />}
         </JHBox>
+
         <Shield ref={refShield}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "330px",
-              height: "195px",
-              position: "absolute",
-              top: "109px",
-            }}
-          >
-            <Logo />
-            <Typography variant="h1" color="text.primary" sx={{ mt: "2rem" }}>
-              JuniorHub
-            </Typography>
-            <Typography
-              variant="h2"
-              sx={{ mt: "0.75rem" }}
-              fontSize={"0.875rem"}
-              color="text.primary"
-            >
-              Агрегатор проектов для Junior IT-специалистов
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "360px",
-            }}
-          >
-            {isNotifyClicked ? (
-              <NotifyForm />
-            ) : (
-              <NotifyButton disabled={false} onClick={handleNotifyClick} />
-            )}
-          </Box>
+          <Logo />
+          <Title />
+          <Description />
+          <Notify />
         </Shield>
       </Box>
     </>
