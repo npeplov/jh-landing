@@ -10,7 +10,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({ sx, ...props }) => {
   const isDesktop = useMediaQuery("(hover: hover) and (pointer: fine)");
   const commonSx: React.CSSProperties = {
     padding: "0.625em 1.5em",
-    fontSize: "clamp(0.875rem, 0.5207rem + 1.5748vw, 1rem)",
+    // padding: "4px 14px",
+    fontSize: "16px",
+    // fontSize: "clamp(0.875rem, 0.5207rem + 1.5748vw, 1rem)",
     transition: "all .2s ease",
     ...(isDesktop && {
       "&:hover": {

@@ -23,11 +23,7 @@ const Notify = () => {
     setNotifyClicked(!isNotifyClicked);
   };
   return (
-    <Box
-      sx={{
-        // pt: "calc(22/2/312*100%)",
-      }}
-    >
+    <Box>
       {isNotifyClicked ? (
         <NotifyForm />
       ) : (
@@ -41,10 +37,11 @@ const Logo = () => {
   return (
     <Box
       sx={{
-        mb: "calc(23/2/312*100%)",
-        width: "calc(67/312*100%)",
+        // mb: "calc(23/2/312*100%)",
+        // width: "calc(67/312*100%)",
+        width: "86px",
         alignSelf: "end",
-        height: "calc(74/155.5*100%)",
+        // height: "calc(74/155.5*100%)",
         boxSizing: "border-box",
       }}
     >
@@ -102,9 +99,9 @@ function App() {
           },
         })}
       >
-        {/* <video src={video} loop muted autoPlay width="100%" style={{
+        <video src={video} loop muted autoPlay width="100%" style={{
           display: "block"
-        }}/> */}
+        }}/>
       </Box>
       <Box
         sx={{
@@ -149,11 +146,17 @@ function App() {
         </JHBox>
 
         <Shield ref={refShield}>
+          <Box></Box>
           <Logo />
+          <Box></Box>
           <Title />
+          <Box></Box>
           <Description />
+          <Box></Box>
           <Notify />
+          <Box></Box>
         </Shield>
+        <Box></Box>
       </Box>
     </>
   );

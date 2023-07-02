@@ -1,17 +1,16 @@
-import Alert from "@mui/material/Alert";
+import { Alert, AlertProps } from "@mui/material";
 
-const JHAlert = ({  ...props }) => {
+interface JHAlertProps extends AlertProps {
+  sx?: React.CSSProperties;
+}
+
+const JHAlert: React.FC<JHAlertProps> = ({ sx, ...props }) => {
   return (
     <Alert
       {...props}
       sx={(theme) => ({
-        p: "0.8em 1.6em",
-
-        [theme.breakpoints.up("mobile")]: {
-          p: "0.5em 1.5em",
-        },
-
-        fontSize: "clamp(0.67rem, -0.2654rem + 4.1575vw, 1rem)",
+        fontSize: "16px",
+        // fontSize: "clamp(0.67rem, -0.2654rem + 4.1575vw, 1rem)",
         borderRadius: "30px",
         color: theme.palette.text.primary,
         borderColor: theme.palette.success.dark,
@@ -40,17 +39,10 @@ const JHAlert = ({  ...props }) => {
             fontSize: "1.2em",
           }
         },
+        ...sx,
       })}
     />
   );
 };
 
-// MuiButtonBase-root 
-// MuiIconButton-root 
-// MuiIconButton-colorInherit 
-// MuiIconButton-sizeSmall 
-// css-2hllsz-MuiButtonBase-root-MuiIconButton-root
-
 export default JHAlert;
-
-

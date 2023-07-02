@@ -1,56 +1,52 @@
 import {
-  Alert,
-  AlertProps,
   Box,
-  Button,
-  TextField,
-  colors,
+  TextField
 } from "@mui/material";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
+import CustomButton from "../UI/CustomButton";
+import { validateEmail } from "../utils/validateEmail";
 import { NotifyButton } from "./buttons/NotifyButton";
 import "./input/formInput.css";
 import JHAlert from "./jhalert/JHAlert";
-import CustomButton from "../UI/CustomButton";
-import { validateEmail } from "../utils/validateEmail";
 
-const JHInput = () => {
-  const [error, setError] = useState(false);
-  return (
-    <TextField
-      variant="filled"
-      // label="Введите email"
-      error={error}
-      onChange={() => {
-        setError(true);
-      }}
-      onMouseLeave={() => {
-        setError(false);
-      }}
-      sx={{
-        ".MuiFilledInput-root:hover:not(.Mui-disabled, .Mui-error):before": {
-          borderBottom: "none",
-        },
-        ".MuiFilledInput-root": {
-          "&::before": {
-            borderBottom: "none",
-          },
-          "&::after": {
-            borderBottom: "none",
-          },
-        },
-        ".MuiInputBase-colorPrimary": {
-          borderRadius: "0.9rem",
-          color: "#ddd",
-          background: "#E6E1E5",
-          "&:hover": {
-            color: "#cac4d0",
-          },
-        },
-      }}
-    />
-  );
-};
+// const JHInput = () => {
+//   const [error, setError] = useState(false);
+//   return (
+//     <TextField
+//       variant="filled"
+//       // label="Введите email"
+//       error={error}
+//       onChange={() => {
+//         setError(true);
+//       }}
+//       onMouseLeave={() => {
+//         setError(false);
+//       }}
+//       sx={{
+//         ".MuiFilledInput-root:hover:not(.Mui-disabled, .Mui-error):before": {
+//           borderBottom: "none",
+//         },
+//         ".MuiFilledInput-root": {
+//           "&::before": {
+//             borderBottom: "none",
+//           },
+//           "&::after": {
+//             borderBottom: "none",
+//           },
+//         },
+//         ".MuiInputBase-colorPrimary": {
+//           borderRadius: "0.9rem",
+//           color: "#ddd",
+//           background: "#E6E1E5",
+//           "&:hover": {
+//             color: "#cac4d0",
+//           },
+//         },
+//       }}
+//     />
+//   );
+// };
 
 export const NotifyForm = () => {
   const [isEmailSent, setEmailSent] = useState(false);
@@ -75,20 +71,16 @@ export const NotifyForm = () => {
     setEmailError(true);
   };
 
-  // const refButton = useRef<HTMLButtonElement>(null);
-
-  // gap 20
-  // - поднять лого выше. Щас 93 сверху = 0.425fr , надо 41 = x
-
   return (
     <>
       {!isEmailSent && (
         <Box
+          marginTop="-15px"
           display="grid"
           alignItems="start"
           height={1}
-          gridTemplateRows="0.5406fr 0.4594fr"
-          // поднять инпут выше, отменить padding
+          gridTemplateRows="77px 42px"
+          justifyItems={"center"}
         >
           <TextField
             autoComplete="off"

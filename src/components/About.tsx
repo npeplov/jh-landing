@@ -4,6 +4,7 @@ import CustomButton from "../UI/CustomButton";
 import { Input } from "../UI/Input";
 import { validateEmail } from "../utils/validateEmail";
 import { ContactsButton } from "./buttons/ContactsButton";
+import JHAlert from "./jhalert/JHAlert";
 
 export const About = () => {
   const [message, setMessage] = useState("");
@@ -33,8 +34,11 @@ export const About = () => {
   return (
     <Box
       sx={() => ({
+        background: "rgba(255, 255, 255, 0.05);",
+        borderRadius: "10px",
+        p: "30px",
         display: "flex",
-        width: "466px",
+        width: "496px",
         textAlign: "left",
         flexDirection: "column",
         gap: "36px",
@@ -59,7 +63,7 @@ export const About = () => {
         <ContactsButton onClick={() => setIsContactClicked(true)} />
       )}
 
-      {isContactClicked && (
+      {isContactClicked && !isEmailSent && (
         <Stack gap={2}>
           <Input
             value={email}
@@ -69,17 +73,33 @@ export const About = () => {
             onChange={({ target }) => {
               setEmail(target.value);
             }}
+            error={emailError}
+            helperText={emailError && "Неверный формат почты"}
           />
           <Input
-          multiline
-          maxRows={4}
-          minRows={4}
+            multiline
+            maxRows={3}
+            minRows={3}
             value={message}
             label="Ваше сообщение"
             name="message"
             autoComplete="off"
             onChange={({ target }) => {
               setMessage(target.value);
+            }}
+            inputProps={{
+              sx: {
+                "&::-webkit-scrollbar": {
+                  width: "6px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "#00A1E7",
+                  borderRadius: "4px",
+                },
+                "&::-webkit-scrollbar-thumb:hover": {
+                  backgroundColor: "#82D9FF",
+                },
+              },
             }}
           />
           <CustomButton
@@ -90,6 +110,17 @@ export const About = () => {
             Отправить
           </CustomButton>
         </Stack>
+      )}
+      {isEmailSent && (
+        <JHAlert
+          severity="success"
+          variant="filled"
+          sx={{
+            margin: "0 auto",
+          }}
+        >
+          Cообщение отправлено!
+        </JHAlert>
       )}
     </Box>
   );

@@ -12,7 +12,7 @@ export const darkTheme = {
   
   primary: {
     customColor: "#aaa",
-    default: "#eee", // ????
+    default: "#00A1E7", // ????
 
     // backgrounds, borders, require a slightly different shade of the primary color
     main: "#00A1E7", 
