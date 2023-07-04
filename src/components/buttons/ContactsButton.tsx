@@ -1,13 +1,14 @@
-import { Button } from "@mui/material";
+import React from "react";
+import CustomButton from "../../UI/CustomButton";
 import { ReactComponent as ContactsIcon } from "../../svg/contacts.svg";
 
 interface ContactsButtonProps {
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export const ContactsButton: React.FC<ContactsButtonProps> = ({ onClick }) => {
   return (
-    <Button
+    <CustomButton
       onClick={onClick}
       sx={{
         display: "flex",
@@ -20,14 +21,10 @@ export const ContactsButton: React.FC<ContactsButtonProps> = ({ onClick }) => {
         transition: "all .2s ease",
         width: "fit-content",
         margin: "0 auto",
-        "&:hover": {
-          background: "#82D9FF",
-          color: "#101335",
-        },
       }}
     >
       <ContactsIcon />
       Связаться с нами
-    </Button>
+    </CustomButton>
   );
 };

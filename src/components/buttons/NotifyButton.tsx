@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import CustomButton from "../../UI/CustomButton";
 
 interface NotifyButtonProps {
   onClick: () => void;
@@ -10,19 +10,19 @@ export const NotifyButton: React.FC<NotifyButtonProps> = ({
   disabled,
 }) => {
   return (
-    <Button
+    <>
+    <CustomButton
       color={"primary"}
       onClick={onClick}
       disabled={disabled}
       variant="contained"
       sx={{
-        padding: "0.625rem 1.5rem",
-        "&:hover": {
-          color: "ButtonText",
-        },
+        backgroundColor: "primary.300",
       }}
+      
     >
       Сообщить о старте
-    </Button>
+    </CustomButton>
+    </>
   );
 };
