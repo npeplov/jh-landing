@@ -1,12 +1,12 @@
-import { Box, Stack, Typography } from "@mui/material";
-import { useState } from "react";
-import CustomButton from "../UI/CustomButton";
-import { Input } from "../UI/Input";
-import { validateEmail } from "../utils/validateEmail";
-import { ContactsButton } from "./buttons/ContactsButton";
-import JHAlert from "./jhalert/JHAlert";
+import { Box, BoxProps, Stack, Typography } from "@mui/material";
+import { forwardRef, useState } from "react";
+import CustomButton from "../../UI/CustomButton";
+import { Input } from "../../UI/Input";
+import { validateEmail } from "../../utils/validateEmail";
+import { ContactsButton } from "../buttons/ContactsButton";
+import JHAlert from "../jhalert/JHAlert";
 
-export const About = () => {
+export const About = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   const [message, setMessage] = useState("");
   const [isContactClicked, setIsContactClicked] = useState(false);
   const [email, setEmail] = useState("");
@@ -43,6 +43,9 @@ export const About = () => {
         flexDirection: "column",
         gap: "36px",
         color: "text.primary",
+        position: "absolute",
+        left: -370,
+        top: 150,
       })}
     >
       <Typography>
@@ -124,4 +127,4 @@ export const About = () => {
       )}
     </Box>
   );
-};
+});
