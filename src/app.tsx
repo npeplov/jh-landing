@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { About } from "./components/about/About";
 
@@ -40,18 +41,14 @@ function App() {
 
   return (
     <>
-      <Video />
+      {/* <Video /> */}
 
       <Container>
-        
-        <AboutButton onClick={handleAboutClick} />
+        <motion.div><AboutButton onClick={handleAboutClick} /></motion.div>
 
-        {isInitiated &&
-         <About ref={refAboutBox} 
-        />}
+        {isInitiated && <About ref={refAboutBox} />}
 
         <Shield ref={refShield} />
-
       </Container>
     </>
   );
