@@ -33,6 +33,8 @@ export const About = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
 
   return (
     <Box
+      ref={ref}
+      {...props}
       sx={() => ({
         background: "rgba(255, 255, 255, 0.05);",
         borderRadius: "10px",
