@@ -1,40 +1,58 @@
 import { Box, BoxProps } from "@mui/material";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
+import { Description } from "../components/Description";
+import { Title } from "../components/Title";
+import { ReactComponent as LogoImg } from "../svg/juniorhub.svg";
+import { NotifyForm } from "./NotifyForm";
+import { NotifyButton } from "./buttons/NotifyButton";
+
+const Logo = () => {
+  return (
+    <Box
+      sx={{
+        // mb: "calc(23/2/312*100%)",
+        // width: "calc(67/312*100%)",
+        width: "86px",
+        alignSelf: "end",
+        // height: "calc(74/155.5*100%)",
+        boxSizing: "border-box",
+      }}
+    >
+      <LogoImg
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </Box>
+  );
+};
+
+const Notify = () => {
+  const [isNotifyClicked, setNotifyClicked] = useState(false);
+  const handleNotifyClick = () => {
+    setNotifyClicked(!isNotifyClicked);
+  };
+  return (
+    <Box>
+      {isNotifyClicked ? (
+        <NotifyForm />
+      ) : (
+        <NotifyButton disabled={false} onClick={handleNotifyClick} />
+      )}
+    </Box>
+  );
+};
 
 export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  //     const baseWidth = 360;
-  //     const targetWidth = 445;
-  //     const baseScale = 0.77;
-  //     const targetScale = 1.0;
-  //     const calculatedScale = (targetScale - baseScale) / (targetWidth - baseWidth) * (screenWidth - baseWidth) + baseScale;
-
-  //     calculatedScale <1 ? setScale(calculatedScale) : setScale(1);
-  //   };
-
-  //   window.addEventListener('resize', handleResize);
-
-  //   handleResize();
-
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-
   return (
     <Box
       ref={ref}
       {...props}
       sx={(theme) => ({
-        // transform: "scale(0.77) !important",
         [theme.breakpoints.down("sm")]: {
           transform: `scale(${0.78}) !important`,
         },
-        // [theme.breakpoints.up("sm")]: {
-        //   transform: `scale(${1.0}) !important`,
-        // },
         // from 300 when screen width is 360 scale = 0.77
         // to 385 when screen width is 445 scale 1.0
         margin: "0 auto",
@@ -53,6 +71,16 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
         position: "relative",
         zIndex: 999,
       })}
-    ></Box>
+    >
+      <Box></Box>
+      <Logo />
+      <Box></Box>
+      <Title />
+      <Box></Box>
+      <Description />
+      <Box></Box>
+      <Notify />
+      <Box></Box>
+    </Box>
   );
 });
