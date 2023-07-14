@@ -36,97 +36,106 @@ export const About = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
       ref={ref}
       {...props}
       sx={() => ({
-        background: "rgba(255, 255, 255, 0.05);",
-        borderRadius: "10px",
-        p: "30px",
-        display: "flex",
-        width: "496px",
-        textAlign: "left",
-        flexDirection: "column",
-        gap: "36px",
-        color: "text.primary",
         position: "absolute",
+        top: 0,
+        width: "50%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        color: "text.primary",
         left: -370,
-        top: 150,
+        zIndex: "0",
       })}
     >
-      <Typography>
-        Команда JuniorHub создает платформу, на которой начинающие разработчики
-        смогут улучшить свои навыки и реализовать собственные идеи, а
-        представители бизнеса – найти исполнителя на свой заказ или поддержать
-        начинающих специалистов.
-      </Typography>
-      <Typography>
-        Проект разрабатывается на стеке:
-        <br />
-        Backend - Java, WebFlux, Spring, PostgreSQL, Keycloak
-        <br />
-        Frontend - JavaScript, TypeScript, React, Redux, Material UI
-      </Typography>
+      <Stack
+        sx={() => ({
+          background: "rgba(46, 49, 83, 0.70)",
+          maxWidth: "450px",
+          borderRadius: "20px",
+          gap: "36px",
+          p: "30px",
+        })}
+      >
+        <Typography>
+          Команда JuniorHub создает платформу, на которой начинающие
+          разработчики смогут улучшить свои навыки и реализовать собственные
+          идеи, а представители бизнеса – найти исполнителя на свой заказ или
+          поддержать начинающих специалистов.
+        </Typography>
+        <Typography>
+          Проект разрабатывается на стеке:
+          <br />
+          Backend - Java, WebFlux, Spring, PostgreSQL, Keycloak
+          <br />
+          Frontend - JavaScript, TypeScript, React, Redux, Material UI
+        </Typography>
 
-      {!isContactClicked && (
-        <ContactsButton onClick={() => setIsContactClicked(true)} />
-      )}
+        {!isContactClicked && (
+          <ContactsButton onClick={() => setIsContactClicked(true)} />
+        )}
 
-      {isContactClicked && !isEmailSent && (
-        <Stack gap={2}>
-          <Input
-            value={email}
-            label="Email, на который отправить ответ"
-            name="email"
-            autoComplete="off"
-            onChange={({ target }) => {
-              setEmail(target.value);
-            }}
-            error={emailError}
-            helperText={emailError && "Неверный формат почты"}
-          />
-          <Input
-            multiline
-            maxRows={3}
-            minRows={3}
-            value={message}
-            label="Ваше сообщение"
-            name="message"
-            autoComplete="off"
-            onChange={({ target }) => {
-              setMessage(target.value);
-            }}
-            inputProps={{
-              sx: {
-                "&::-webkit-scrollbar": {
-                  width: "6px",
+        {isContactClicked && !isEmailSent && (
+          <Stack gap={2}>
+            <Input
+              value={email}
+              label="Email, на который отправить ответ"
+              name="email"
+              autoComplete="off"
+              onChange={({ target }) => {
+                setEmail(target.value);
+              }}
+              error={emailError}
+              helperText={emailError && "Неверный формат почты"}
+            />
+            <Input
+              multiline
+              maxRows={3}
+              minRows={3}
+              value={message}
+              label="Ваше сообщение"
+              name="message"
+              autoComplete="off"
+              onChange={({ target }) => {
+                setMessage(target.value);
+              }}
+              inputProps={{
+                sx: {
+                  "&::-webkit-scrollbar": {
+                    width: "6px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#00A1E7",
+                    borderRadius: "4px",
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    backgroundColor: "#82D9FF",
+                  },
                 },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "#00A1E7",
-                  borderRadius: "4px",
-                },
-                "&::-webkit-scrollbar-thumb:hover": {
-                  backgroundColor: "#82D9FF",
-                },
-              },
+              }}
+            />
+            <CustomButton
+              variant="contained"
+              onClick={handleClick}
+              sx={{ width: "fit-content", margin: "0 auto" }}
+            >
+              Отправить
+            </CustomButton>
+          </Stack>
+        )}
+        {isEmailSent && (
+          <JHAlert
+            severity="success"
+            variant="filled"
+            sx={{
+              margin: "0 auto",
             }}
-          />
-          <CustomButton
-            variant="contained"
-            onClick={handleClick}
-            sx={{ width: "fit-content", margin: "0 auto" }}
           >
-            Отправить
-          </CustomButton>
-        </Stack>
-      )}
-      {isEmailSent && (
-        <JHAlert
-          severity="success"
-          variant="filled"
-          sx={{
-            margin: "0 auto",
-          }}
-        >
-          Cообщение отправлено!
-        </JHAlert>
-      )}
+            Cообщение отправлено!
+          </JHAlert>
+        )}
+      </Stack>
     </Box>
   );
 });
