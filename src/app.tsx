@@ -11,29 +11,25 @@ import { Video } from "./components/video/Video";
 
 function App() {
   const [isAboutClicked, setAboutClicked] = useState(false);
-  const [isInitiated, setInitiated] = useState(false);
+  const [isAboutBoxShowed, setAboutBoxShowed] = useState(false);
 
   const handleAboutClick = () => {
-    setInitiated(true);
+    setAboutBoxShowed(true);
     setAboutClicked(!isAboutClicked);
   };
 
-  useEffect(() => {
-    refAboutButton.current && gsap.to(refAboutButton.current, { x: 150 });
-  }, []);
-
   const refAboutBox = useRef<HTMLDivElement>(null);
   const refShield = useRef<HTMLDivElement>(null);
-  const refAboutButton = useRef<HTMLButtonElement>(null);
-  const refIconBack = useRef<HTMLDivElement>(null);
+  // const refAboutButton = useRef<HTMLButtonElement>(null);
+  // const refIconBack = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isAboutClicked) {
-      gsap.to(refIconBack.current, { x: -10, opacity: 1 });
+      // gsap.to(refIconBack.current, { x: -10, opacity: 1 });
       gsap.to(refShield.current, { x: 380 });
       gsap.to(refAboutBox.current, { duration: 1, x: 500, opacity: 1 });
     } else {
-      gsap.to(refIconBack.current, { x: -200, opacity: 0 });
+      // gsap.to(refIconBack.current, { x: -200, opacity: 0 });
       gsap.to(refShield.current, { x: 0 });
       gsap.to(refAboutBox.current, { duration: 1, x: -100, opacity: 0 });
     }
@@ -41,14 +37,32 @@ function App() {
 
   return (
     <>
-      {/* <Video /> */}
+      <motion.div
+        initial={{ opacity: 0, y: "100vh" }}
+        animate={{ opacity: 1, y: "100vh" }}
+        transition={{ duration: 10, delay: 0.5 }}
+      >
+        {/* <Video /> */}
+      </motion.div>
 
       <Container>
-        <motion.div><AboutButton onClick={handleAboutClick} /></motion.div>
+        <AboutButton onClick={handleAboutClick} />
 
-        {isInitiated && <About ref={refAboutBox} />}
+        {isAboutBoxShowed && (
+          <motion.div
 
-        <Shield ref={refShield} />
+          >
+            <About ref={refAboutBox} />
+          </motion.div>
+        )}
+
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Shield ref={refShield} />
+        </motion.div>
       </Container>
     </>
   );
