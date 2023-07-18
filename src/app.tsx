@@ -1,39 +1,78 @@
-import { gsap } from "gsap";
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import "./app.css";
+import { motion, AnimatePresence } from "framer-motion";
+import { CSSProperties, useEffect, useState } from "react";
 import { About } from "./components/about/About";
 
-import "./app.css";
 import { Container } from "./components/Container";
-import { Shield } from "./components/Shield";
 import { AboutButton } from "./components/buttons/AboutButton";
+import { Shield } from "./components/shield/Shield";
 import { Video } from "./components/video/Video";
 
 function App() {
-  const [isAboutClicked, setAboutClicked] = useState(false);
-  const [isAboutBoxShowed, setAboutBoxShowed] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [isFirstRender, setFirstRender] = useState(true);
 
   const handleAboutClick = () => {
-    setAboutBoxShowed(true);
-    setAboutClicked(!isAboutClicked);
+    setFirstRender(false);
+    setShowAbout(!showAbout);
   };
 
-  const refAboutBox = useRef<HTMLDivElement>(null);
-  const refShield = useRef<HTMLDivElement>(null);
-  // const refAboutButton = useRef<HTMLButtonElement>(null);
-  // const refIconBack = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    if (isAboutClicked) {
-      // gsap.to(refIconBack.current, { x: -10, opacity: 1 });
-      gsap.to(refShield.current, { x: 380 });
-      gsap.to(refAboutBox.current, { duration: 1, x: 500, opacity: 1 });
-    } else {
-      // gsap.to(refIconBack.current, { x: -200, opacity: 0 });
-      gsap.to(refShield.current, { x: 0 });
-      gsap.to(refAboutBox.current, { duration: 1, x: -100, opacity: 0 });
-    }
-  }, [isAboutClicked]);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isDesktop = windowWidth > 900;
+
+  const aboutStyle: CSSProperties = {
+    width: isDesktop ? "50%" : "100%",
+    overflow: "hidden",
+    height: "100vh",
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const shieldStyle: CSSProperties = {
+    width: isDesktop ? "50%" : "100%",
+    overflow: "hidden",
+    height: "100vh",
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const shieldVariants = {
+    firstShowInitial: { y: -100 },
+    desktopInitial: { x: 0, y: 0 },
+    desktopAnimate: { y: 0, x: 0 },
+    desktopHide: { x: "50%" },
+
+    mobileShow: { opacity: 1, x: 0 },
+    mobileInitial: { opacity: 0, x: "-100vw" },
+    mobileHide: { x: "-100vw" },
+  };
+
+  const aboutVariants = {
+    desktopInitial: { opacity: 0, x: "-100vw" },
+    desktopShow: { opacity: 1, x: "-50%" },
+    desktopHide: { x: "-100vw" },
+
+    mobileShow: { opacity: 1, x: 0 },
+    mobileInitial: { opacity: 0, x: "100vw" },
+    mobileHide: { x: "100vw" },
+  };
 
   return (
     <>
@@ -48,21 +87,60 @@ function App() {
       <Container>
         <AboutButton onClick={handleAboutClick} />
 
-        {isAboutBoxShowed && (
+        {isDesktop && (
           <motion.div
-
+            initial={isFirstRender ? "firstShowInitial" :  "desktopInitial"}
+            animate={isFirstRender ? "desktopAnimate" : showAbout ? "desktopHide" : "desktopInitial"}
+            variants={shieldVariants}
+            style={shieldStyle}
+            transition={{ type: "spring", stiffness: 100 }}
           >
-            <About ref={refAboutBox} />
+            <Shield />
           </motion.div>
         )}
 
-        <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <Shield ref={refShield} />
-        </motion.div>
+        <AnimatePresence>
+          {isDesktop && showAbout && (
+            <motion.div
+              initial="desktopInitial"
+              animate="desktopShow"
+              exit="desktopHide"
+              variants={aboutVariants}
+              style={aboutStyle}
+            >
+              <About />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {!isDesktop && showAbout && (
+            <motion.div
+              initial="mobileInitial"
+              animate="mobileShow"
+              exit="mobileHide"
+              variants={aboutVariants}
+              style={aboutStyle}
+            >
+              <About />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {!isDesktop && !showAbout && (
+            <motion.div
+              initial="mobileInitial"
+              animate="mobileShow"
+              exit="mobileHide"
+              variants={shieldVariants}
+              style={shieldStyle}
+            >
+              <Shield />
+            </motion.div>
+          )}
+         </AnimatePresence>
+
       </Container>
     </>
   );

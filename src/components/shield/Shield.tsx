@@ -1,10 +1,10 @@
 import { Box, BoxProps } from "@mui/material";
 import { forwardRef, useState } from "react";
-import { Description } from "../components/Description";
-import { Title } from "../components/Title";
-import { ReactComponent as LogoImg } from "../svg/juniorhub.svg";
+import { Description } from "./Description";
+import { Title } from "./Title";
+import { ReactComponent as LogoImg } from "../../svg/juniorhub.svg";
 import { NotifyForm } from "./NotifyForm";
-import { NotifyButton } from "./buttons/NotifyButton";
+import { NotifyButton } from "../buttons/NotifyButton";
 
 const Logo = () => {
   return (
@@ -53,8 +53,6 @@ export const Shield = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
         [theme.breakpoints.down("sm")]: {
           transform: `scale(${0.78}) !important`,
         },
-        // from 300 when screen width is 360 scale = 0.77
-        // to 385 when screen width is 445 scale 1.0
         margin: "0 auto",
         display: "grid",
         gridTemplateColumns: "1fr",

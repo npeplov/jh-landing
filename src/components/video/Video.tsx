@@ -7,9 +7,6 @@ export const Video = () => {
       sx={(theme) => ({
         position: "absolute",
         bottom: 0,
-        [theme.breakpoints.down("sm")]: {
-          display: "none",
-        },
         [theme.breakpoints.down("lg")]: {
           width: "100vw",
         },

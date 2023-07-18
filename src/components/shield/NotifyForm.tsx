@@ -4,11 +4,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import CustomButton from "../UI/CustomButton";
-import { validateEmail } from "../utils/validateEmail";
-import { NotifyButton } from "./buttons/NotifyButton";
-import "./input/formInput.css";
-import JHAlert from "./jhalert/JHAlert";
+import CustomButton from "../../UI/CustomButton";
+import { validateEmail } from "../../utils/validateEmail";
+import { NotifyButton } from "../buttons/NotifyButton";
+import "../input/formInput.css";
+import JHAlert from "../jhalert/JHAlert";
 
 // const JHInput = () => {
 //   const [error, setError] = useState(false);

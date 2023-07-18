@@ -32,30 +32,33 @@ export const About = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
   };
 
   return (
-    <Box
-      ref={ref}
-      {...props}
-      sx={() => ({
-        position: "absolute",
-        top: 0,
-        width: "50%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        color: "text.primary",
-        left: -370,
-        zIndex: "0",
-      })}
-    >
+    // <Stack
+    //   sx={(theme) => ({
+    //     top: 0,
+    //     position: "absolute",
+    //     height: "100%",
+    //     display: "flex",
+    //     alignItems: "center",
+    //     justifyContent: "center",
+    //     flexDirection: "column",
+    //     color: "text.primary",
+    //     zIndex: 0,
+    //     [theme.breakpoints.down("sm")]: {
+    //       width: "100%"
+    //     },
+    //   })}
+    // >
       <Stack
-        sx={() => ({
+        sx={(theme) => ({
           background: "rgba(46, 49, 83, 0.70)",
           maxWidth: "450px",
           borderRadius: "20px",
+          color: "text.primary",
           gap: "36px",
           p: "30px",
+          [theme.breakpoints.down("sm")]: {
+            maxWidth: "340px"
+          },
         })}
       >
         <Typography>
@@ -136,6 +139,6 @@ export const About = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
           </JHAlert>
         )}
       </Stack>
-    </Box>
+    // </Stack>
   );
 });
