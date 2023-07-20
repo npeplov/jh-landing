@@ -6,12 +6,12 @@ export const darkTheme = {
 
   // mode: "dark",
   // buttons, links, and active states
-  grey500: {
-    color: "#969696"
+
+  grey: {
+    800: "#969696"
   },
   
   primary: {
-    customColor: "#aaa",
     default: "#00A1E7", // ????
 
     // backgrounds, borders, require a slightly different shade of the primary color
