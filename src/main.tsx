@@ -77,6 +77,9 @@ const theme = createTheme({
       paper: "#2E3153",
       default: "#101335",
     },
+    grey: {
+      800: "#969696",
+    },
     primary: { // backgrounds, borders, require a slightly different shade of the primary color
       main: "#00a1e7",
       200: "#82d9ff",
@@ -85,6 +88,7 @@ const theme = createTheme({
       500: "#0050ad",
       600: "#001e7b",
       700: "#2e3153", 
+      800: "#0B1F33",
       900: "#5C5C5C",
       // for shading, gradients, and creating visual depth
       dark: "#82D9FF",

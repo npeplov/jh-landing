@@ -1,52 +1,11 @@
-import {
-  Box,
-  TextField
-} from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 
 import CustomButton from "../../UI/CustomButton";
 import { validateEmail } from "../../utils/validateEmail";
 import { NotifyButton } from "../buttons/NotifyButton";
-import "../input/formInput.css";
 import JHAlert from "../jhalert/JHAlert";
-
-// const JHInput = () => {
-//   const [error, setError] = useState(false);
-//   return (
-//     <TextField
-//       variant="filled"
-//       // label="Введите email"
-//       error={error}
-//       onChange={() => {
-//         setError(true);
-//       }}
-//       onMouseLeave={() => {
-//         setError(false);
-//       }}
-//       sx={{
-//         ".MuiFilledInput-root:hover:not(.Mui-disabled, .Mui-error):before": {
-//           borderBottom: "none",
-//         },
-//         ".MuiFilledInput-root": {
-//           "&::before": {
-//             borderBottom: "none",
-//           },
-//           "&::after": {
-//             borderBottom: "none",
-//           },
-//         },
-//         ".MuiInputBase-colorPrimary": {
-//           borderRadius: "0.9rem",
-//           color: "#ddd",
-//           background: "#E6E1E5",
-//           "&:hover": {
-//             color: "#cac4d0",
-//           },
-//         },
-//       }}
-//     />
-//   );
-// };
+import "../input/formInput.css";
 
 export const NotifyForm = () => {
   const [isEmailSent, setEmailSent] = useState(false);
@@ -102,13 +61,6 @@ export const NotifyForm = () => {
             variant="standard"
             label="Введите email"
             helperText={emailError && "Неверный формат почты"}
-            InputProps={{}}
-            InputLabelProps={
-              {
-                // focused: true,
-                // color: "info",
-              }
-            }
             onChange={({ target }) => {
               setEmail(target.value);
             }}
@@ -127,15 +79,6 @@ export const NotifyForm = () => {
         </Box>
       )}
 
-      {/*
-      
-      --------------  JH ALERT  ------------ 
-      
-      1. пробросить онклоз
-    
-      
-      */}
-
       {isEmailSent && (
         <div
           style={{
@@ -145,7 +88,6 @@ export const NotifyForm = () => {
         >
           {!open && <NotifyButton disabled onClick={() => null} />}
           {open && (
-            // <Zoom in={open} timeout={500}>
             <div>
               <JHAlert
                 severity="success"
@@ -156,42 +98,6 @@ export const NotifyForm = () => {
               >
                 Ждем вас!
               </JHAlert>
-              {/* <Alert
-                onClose={() => {
-                  setOpen((prev) => !prev);
-                }}
-                sx={(theme) => ({
-                  [theme.breakpoints.down("sm")]: {
-                    fontSize: "10px",
-                    padding: "0 16px 0 16px",
-                    "&.MuiAlert-icon": {
-                      padding: "0",
-                      alignItems: "center",
-                      fontSize: "10px",
-                    },
-                    "& .MuiAlert-action": {
-                      padding: "0",
-                      alignItems: "center",
-                    },
-                  },
-                  [theme.breakpoints.up("md")]: {
-                    fontSize: "14px",
-                  },
-                  color: "#fff",
-                  borderRadius: 30,
-                  background: "#5DCB4B",
-                  "& svg": {
-                    fill: "#fff",
-                    width: "15px",
-                    height: "15px",
-                  },
-                })}
-                severity="success"
-                variant="filled"
-              >
-              Ждем вас!
-              </Alert> */}
-              {/* </Zoom> */}
             </div>
           )}
         </div>

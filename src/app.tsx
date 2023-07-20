@@ -7,10 +7,12 @@ import { Container } from "./components/Container";
 import { AboutButton } from "./components/buttons/AboutButton";
 import { Shield } from "./components/shield/Shield";
 import { Video } from "./components/video/Video";
+import { Modal } from "./components/modal/Modal";
 
 function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [isFirstRender, setFirstRender] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleAboutClick = () => {
     setFirstRender(false);
@@ -81,10 +83,13 @@ function App() {
         animate={{ opacity: 1, y: "100vh" }}
         transition={{ duration: 10, delay: 0.5 }}
       >
-        {/* <Video /> */}
+        <Video />
       </motion.div>
 
       <Container>
+        
+        <Modal open={modalOpen} setOpen={setModalOpen}/>
+
         <AboutButton onClick={handleAboutClick} />
 
         {isDesktop && (
@@ -108,7 +113,7 @@ function App() {
               variants={aboutVariants}
               style={aboutStyle}
             >
-              <About />
+              <About setModalOpen={setModalOpen} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -122,7 +127,7 @@ function App() {
               variants={aboutVariants}
               style={aboutStyle}
             >
-              <About />
+              <About setModalOpen={setModalOpen} />
             </motion.div>
           )}
         </AnimatePresence>
