@@ -6,5 +6,5 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [svgr(), react()],
   // base: "/jh-landing/",
-  base: "/"
+  base: "/jh-landing"
 })
